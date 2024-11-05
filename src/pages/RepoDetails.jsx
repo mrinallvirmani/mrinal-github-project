@@ -1,18 +1,12 @@
 // src/pages/RepoDetails.jsx
 
-import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React from 'react';
+import { useParams, useOutletContext, Link } from 'react-router-dom';
 
 const RepoDetails = () => {
   const { repoName } = useParams();
-  const [repoDetails, setRepoDetails] = useState(null);
-
-  useEffect(() => {
-    fetch(`https://api.github.com/repos/godaddy/${repoName}`)
-      .then((response) => response.json())
-      .then((data) => setRepoDetails(data))
-      .catch((error) => console.error("Error fetching repo details:", error));
-  }, [repoName]);
+  const { repos } = useOutletContext();
+  const repoDetails = repos.find((repo) => repo.name === repoName);
 
   if (!repoDetails) return <p>Loading repository details...</p>;
 
@@ -26,7 +20,7 @@ const RepoDetails = () => {
       <p><strong>Watchers:</strong> {repoDetails.watchers_count}</p>
       <a href={repoDetails.html_url} target="_blank" rel="noopener noreferrer">View on GitHub</a>
       <div>
-      <Link to="/" className="back-link">Back to repository list</Link>
+        <Link to="/" className="back-link">Back to repository list</Link>
       </div>
     </div>
   );
