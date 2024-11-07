@@ -102,3 +102,17 @@ button, .back-link {
 button:hover, .back-link:hover {
   color: #024a9f;
 }
+
+.pagination button {
+  margin: 5px;
+  padding: 10px 15px;
+  background-color: #0366d6;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination .active {
+  background-color: #024a9f;
+}
